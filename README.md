@@ -1,86 +1,88 @@
 # projeto-julio
+
 Sistema de gerenciamento de produtos e fornecedores.
-Instalação
 
-Clone o repositório:
+---
 
+## Instalação
+
+### 1. Clone o repositório:
+```bash
 git clone https://github.com/seu-usuario/seu-projeto.git
 cd seu-projeto
+```
 
-
-Instale as dependências do PHP:
-
+### 2. Instale as dependências do PHP:
+```bash
 composer install
+```
 
-
-Instale as dependências do frontend:
-
+### 3. Instale as dependências do frontend:
+```bash
 npm install
+```
 
-
-Copie o arquivo de ambiente:
-
+### 4. Copie o arquivo de ambiente:
+```bash
 cp .env.example .env
+```
 
 
-Configure o arquivo .env com os dados do seu banco de dados:
+⚠️ **Dica**: Se der erro de `caching_sha2_password` no MySQL, altere o usuário root para `mysql_native_password`.
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=nome_do_banco
-DB_USERNAME=usuario
-DB_PASSWORD=senha
+---
 
+## Configuração do Laravel
 
-⚠️ Dica: Se der erro de caching_sha2_password no MySQL, altere o usuário root para mysql_native_password.
-
-Configuração do Laravel
-
-Gere a chave da aplicação:
-
+### 1. Gere a chave da aplicação:
+```bash
 php artisan key:generate
+```
 
-
-Crie as tabelas no banco de dados (migrations):
-
+### 2. Crie as tabelas no banco de dados (migrations):
+```bash
 php artisan migrate
+```
 
-
-Se houver seeders para popular o banco:
-
+### 3. Rode seeders para popular o banco (se houver):
+```bash
 php artisan db:seed
+```
 
-
-Compile os assets do frontend:
-
+### 4. Compile os assets do frontend:
+```bash
 npm run dev
+```
+---
 
+## Estrutura de Tabelas
 
-ou para produção:
+**Produtos (`products`)**
+- id
+- nome
+- preço
+- quantidade
+- fornecedor_id
+- created_at
+- updated_at
 
-npm run build
+**Fornecedores (`fornecedors`)**
+- id
+- nome
+- email
+- telefone
+- created_at
+- updated_at
 
-Estrutura de Tabelas
+---
 
-Produtos (products)
+## Modais
 
-id, nome, preço, quantidade, fornecedor_id, created_at, updated_at
+O sistema usa **modais Bootstrap** para criar, editar e deletar produtos/fornecedores.
+- Os modais aparecem automaticamente em caso de erro ou sucesso.
 
-Fornecedores (fornecedors)
-
-id, nome, email, telefone, created_at, updated_at
-
-⚠️ Observação: Ajuste os nomes das tabelas conforme seu projeto. Se a tabela não existir, você terá erro de “Table not found”.
-
-Modais
-
-O sistema usa modais Bootstrap para criar, editar e deletar produtos/fornecedores.
-
-Os modais aparecem automaticamente em caso de erro ou sucesso.
-
-Script usado para abrir modal automaticamente:
-
+**Script usado para abrir modal automaticamente:**
+```blade
 @if ($errors->any())
   <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -89,20 +91,14 @@ Script usado para abrir modal automaticamente:
       });
   </script>
 @endif
+```
 
-Executando a Aplicação
+---
 
-Rodando o servidor Laravel:
+## Executando a Aplicação
 
+### Rodando o servidor Laravel:
+```bash
 php artisan serve
-
-
-Por padrão: http://127.0.0.1:8000
-
-Acesse e teste:
-
-Listagem de produtos: /produtos
-
-Listagem de fornecedores: /fornecedores
-
-Teste os modais para criar, editar e excluir.
+```
+.
