@@ -1,0 +1,125 @@
+# projeto-julio
+
+Sistema de gerenciamento de produtos e fornecedores.
+
+---
+
+## Instalação
+
+### 1. Clone o repositório:
+```bash
+git clone https://github.com/seu-usuario/seu-projeto.git
+cd seu-projeto
+```
+
+### 2. Instale as dependências do PHP:
+```bash
+composer install
+```
+
+### 3. Instale as dependências do frontend:
+```bash
+npm install
+```
+
+### 4. Copie o arquivo de ambiente:
+```bash
+cp .env.example .env
+```
+
+### 5. Configure o arquivo `.env` com os dados do seu banco de dados:
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=nome_do_banco
+DB_USERNAME=usuario
+DB_PASSWORD=senha
+```
+
+⚠️ **Dica**: Se der erro de `caching_sha2_password` no MySQL, altere o usuário root para `mysql_native_password`.
+
+---
+
+## Configuração do Laravel
+
+### 1. Gere a chave da aplicação:
+```bash
+php artisan key:generate
+```
+
+### 2. Crie as tabelas no banco de dados (migrations):
+```bash
+php artisan migrate
+```
+
+### 3. Rode seeders para popular o banco (se houver):
+```bash
+php artisan db:seed
+```
+
+### 4. Compile os assets do frontend:
+```bash
+npm run dev
+```
+ou para produção:
+```bash
+npm run build
+```
+
+---
+
+## Estrutura de Tabelas
+
+**Produtos (`products`)**
+- id
+- nome
+- preço
+- quantidade
+- fornecedor_id
+- created_at
+- updated_at
+
+**Fornecedores (`fornecedors`)**
+- id
+- nome
+- email
+- telefone
+- created_at
+- updated_at
+
+⚠️ **Observação**: Ajuste os nomes das tabelas conforme seu projeto. Se a tabela não existir, você terá erro de “Table not found”.
+
+---
+
+## Modais
+
+O sistema usa **modais Bootstrap** para criar, editar e deletar produtos/fornecedores.
+- Os modais aparecem automaticamente em caso de erro ou sucesso.
+
+**Script usado para abrir modal automaticamente:**
+```blade
+@if ($errors->any())
+  <script>
+      document.addEventListener("DOMContentLoaded", function () {
+          var modal = new bootstrap.Modal(document.getElementById("{{ session('Modal') }}"));
+          modal.show();
+      });
+  </script>
+@endif
+```
+
+---
+
+## Executando a Aplicação
+
+### Rodando o servidor Laravel:
+```bash
+php artisan serve
+```
+Por padrão: `http://127.0.0.1:8000`
+
+### Acesse e teste:
+- Listagem de produtos: `/produtos`
+- Listagem de fornecedores: `/fornecedores`
+- Teste os modais para criar, editar e excluir.
